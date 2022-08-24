@@ -1,0 +1,35 @@
+li {list-style-type: none;
+    font-size: 16pt;
+}
+div {
+    font-size: larger;
+    text-align: center;
+}
+
+table {
+    font-size: larger;
+    border: 1px solid black;
+    border-spacing: 7px 2px;
+}
+
+td {
+    border: 1px solid black;
+    padding: 0 15px;
+}
+
+#blocked {
+    background-color: lightsalmon;
+}
+
+body {
+    background-color: rgba(232, 216, 189, 0.87);
+}
+input {
+    font-size: 20pt;
+}
+input:focus, textarea:focus{
+    background-color: lightyellow;
+}
+input submit {
+    font-size: 12pt;
+}

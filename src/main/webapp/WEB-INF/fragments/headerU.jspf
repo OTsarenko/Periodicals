@@ -1,0 +1,14 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${theLocale}"/>
+<fmt:setBundle basename="messages"/>
+
+<div>
+    <h2 style="float: left"><fmt:message key="label.periodicals"/></h2>
+    <p style="text-align: right;">
+        <a href="app?command=personalAccount">${user.login } <fmt:message key="label.personalAcc"/></a> |
+        <a href="app?command=logOut"><fmt:message key="label.exit"/></a> |
+        <a href="?command=setLocale&locale&com=${param.command}">ENG</a> |
+        <a href="?command=setLocale&locale=uk&com=${param.command}">UKR</a>
+    </p>
+</div>
+<hr>
