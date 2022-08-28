@@ -38,7 +38,7 @@
 
 <form style="margin-left: 1%; margin-bottom: 1%" action="app" method="get">
     <input type="hidden" name="command" value="findPeriodical"><br>
-    <input type="search" name="title" placeholder="   ">
+    <input type="search" name="title" minlength="1" placeholder="   ">
     <button type="submit"><fmt:message key="label.search" /></button>
 </form>
 <c:if test="${param.command != 'periodicalsByTopic'}">

@@ -30,8 +30,8 @@ public class Controller extends HttpServlet {
         try {
             address = getAddress(req,resp);
         } catch (CommandException | DbException e) {
-            LOGGER.debug("Error: {}", e);
-            resp.sendError(500, "Can`t process the command");
+            LOGGER.debug("Error:", e);
+            resp.sendError(500, "Can`t process the command:" +e);
         }
         req.getRequestDispatcher(address).forward(req,resp);
     }
@@ -43,8 +43,8 @@ public class Controller extends HttpServlet {
         try {
             address = getAddress(req, resp);
         } catch (CommandException | DbException e) {
-            LOGGER.debug("Error: {}", e);
-            resp.sendError(500, "Can`t process the command");
+            LOGGER.debug("Error:", e);
+            resp.sendError(500, "Can`t process the command:"+e);
         }
         resp.sendRedirect(address);
     }

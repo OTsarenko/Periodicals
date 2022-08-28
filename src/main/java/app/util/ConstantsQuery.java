@@ -17,6 +17,7 @@ public class ConstantsQuery {
     public static final String UPDATE_USER = "UPDATE user SET login=?, password=?, email=?, facebook=?, account=?, status=?, role_id = (SELECT id FROM role WHERE name = ?), user_language=? WHERE id=?";
     public static final String GET_USER_BY_ID = "SELECT user.id, login, `password`, email, facebook, `account`,  `status`, role.name r, user_language FROM user INNER JOIN role ON user.role_id = role.id WHERE user.id = ?";
     public static final String GET_TOPIC_BY_ID = "SELECT * FROM topic WHERE id = ?";
+    public static final String GET_TOPIC_BY_ENG_NAME = "SELECT * FROM topic WHERE name_eng = ?";
     public static final String GET_USER_BY_LOGIN = "SELECT user.id, login, `password`, email, facebook, `account`,  `status`, role.name r, user_language FROM user INNER JOIN role ON user.role_id = role.id WHERE login = ?";
 
     public static final String GET_USER_BY_EMAIL = "SELECT user.id, login, `password`, email, facebook, `account`,  `status`, role.name r, user_language FROM user INNER JOIN role ON user.role_id = role.id WHERE email = ?";

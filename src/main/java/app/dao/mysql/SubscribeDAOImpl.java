@@ -38,8 +38,8 @@ public class SubscribeDAOImpl implements SubscribeDAO {
             return preparedStatement.executeUpdate() != 0;
         } catch (SQLException e) {
             LOGGER.error("Can't insert subscribe:", e);
+            throw new DbException(e);
         }
-        return false;
     }
 
     @Override
@@ -50,8 +50,8 @@ public class SubscribeDAOImpl implements SubscribeDAO {
             return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             LOGGER.error("Can't delete subscribe:", e);
+            throw new DbException(e);
         }
-        return false;
     }
 
     @Override
@@ -63,8 +63,8 @@ public class SubscribeDAOImpl implements SubscribeDAO {
             return preparedStatement.executeUpdate() != 0;
         } catch (SQLException e) {
             LOGGER.error("Can't update subscribe:", e);
+            throw new DbException(e);
         }
-        return false;
     }
 
     @Override
@@ -80,6 +80,7 @@ public class SubscribeDAOImpl implements SubscribeDAO {
             }
         } catch (SQLException e) {
             LOGGER.error("Can't find subscribes:", e);
+            throw new DbException(e);
         }
         return subscribes;
     }
@@ -98,6 +99,7 @@ public class SubscribeDAOImpl implements SubscribeDAO {
             }
         } catch (SQLException e) {
             LOGGER.error("Can't find subscribes:", e);
+            throw new DbException(e);
         }
         return subscribes;
     }
@@ -114,6 +116,7 @@ public class SubscribeDAOImpl implements SubscribeDAO {
             }
         } catch (SQLException e) {
             LOGGER.error("Can't find subscribe:", e);
+            throw new DbException(e);
         }
         return null;
     }

@@ -9,14 +9,17 @@ import app.web.service.interfacas.PeriodicalService;
 import app.web.service.interfacas.TopicService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.lang.reflect.Array;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import static app.util.Utility.validateData;
 
+/**
+ * The class represents the command to add periodical.
+ */
 public class AddPeriodicalCommand implements Command {
 
     private static final Logger LOGGER = LogManager.getLogger(AddPeriodicalCommand.class);
@@ -30,13 +33,26 @@ public class AddPeriodicalCommand implements Command {
     }
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws CommandException, DbException {
-        String engTitle = req.getParameter("engTitle");
-        String ukrTitle = req.getParameter("ukrTitle");
-        String engDescription = req.getParameter("engDescription");
-        String ukrDescription = req.getParameter("ukrDescription");
-        int issue = Integer.parseInt(req.getParameter("issue"));
-        BigDecimal price = new BigDecimal(req.getParameter("price"));
+        String engTitle = null;
+        String ukrTitle = null;
+        String engDescription = null;
+        String ukrDescription = null;
+        int issue = 0;
+        BigDecimal price = null;
+        try {
+            engTitle = validateData( req.getParameter("engTitle"));
+            ukrTitle = validateData(req.getParameter("ukrTitle"));
+            engDescription = validateData(req.getParameter("engDescription"));
+            ukrDescription = validateData(req.getParameter("ukrDescription"));
+            issue = Integer.parseInt(validateData(req.getParameter("issue")));
+            price = new BigDecimal(validateData(req.getParameter("price")));
+        } catch (IOException e) {
+            LOGGER.error("Not enough data:"+engTitle+" "+ukrTitle+" "+engDescription+" "+ukrDescription+" "+issue+" "+price +e);
+            throw new CommandException(e);
+        }
+
         String[] topicList = req.getParameterValues("topic");
+        if (topicList == null || topicList.length == 0) { throw new CommandException("You didn't select topics");}
         List<Topic> topics = new ArrayList<>();
         for (String t: topicList){
             topics.add(topicService.getTopicById(Integer.parseInt(t)));
@@ -49,13 +65,10 @@ public class AddPeriodicalCommand implements Command {
         periodical.setIssue(issue);
         periodical.setPrice(price);
         try{
-            periodicalService.insertPeriodical(periodical);
-            for(Topic t: topics) {
-                periodicalService.setTopicForPeriodical(t,periodical);
-            }
+            periodicalService.setTopicsForNewPeriodicalTransaction(periodical, topics.toArray(new Topic[0]));
         } catch (DbException e){
-            LOGGER.info("Not enough data:"+engTitle+" "+ukrTitle+" "+engDescription+" "+ukrDescription+" "+issue+" "+price +e);
-            return "app?command=periodicalsForAdmin&wrong=1";
+            LOGGER.error("Failed to add periodical");
+            throw new CommandException(e);
         }
         return "app?command=periodicalsForAdmin";
     }

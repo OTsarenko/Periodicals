@@ -21,6 +21,18 @@ public class Topic implements Serializable {
      * Constructor for Topic.
      * Used to create new Topic.
      *
+     * @param engTopicName   name of topic in english language
+     * @param ukrTopicName   name of topic in ukrainian language
+     */
+    public Topic(String engTopicName, String ukrTopicName) {
+        this.engTopicName = engTopicName;
+        this.ukrTopicName = ukrTopicName;
+    }
+
+    /**
+     * Constructor for Topic.
+     * Used to create new Topic.
+     *
      * @param id             topic id
      * @param engTopicName   name of topic in english language
      * @param ukrTopicName   name of topic in ukrainian language

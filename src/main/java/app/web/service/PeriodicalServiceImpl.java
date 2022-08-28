@@ -7,7 +7,6 @@ import app.entity.Subscribe;
 import app.entity.Topic;
 import app.web.service.interfacas.PeriodicalService;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -54,9 +53,8 @@ public class PeriodicalServiceImpl implements PeriodicalService {
         return periodicalDAO.getPeriodicalsByTopic(topic);
     }
 
-    @Override
-    public void setTopicForPeriodical(Topic topic, Periodical periodical) throws DbException{
-        periodicalDAO.setTopicForPeriodical(topic, periodical);
+    public void setTopicsForNewPeriodicalTransaction(Periodical periodical, Topic...topics) throws DbException{
+        periodicalDAO.setTopicForNewPeriodicalTransaction(periodical, topics);
     }
 
     @Override

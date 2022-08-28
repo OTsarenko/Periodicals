@@ -1,7 +1,6 @@
 package app.web.controller.commands.container;
 
 import app.dao.DbException;
-import app.entity.Subscribe;
 import app.entity.User;
 import app.enums.UserLanguage;
 import app.util.EncryptPassword;
@@ -10,15 +9,17 @@ import app.web.controller.commands.CommandException;
 import app.web.service.interfacas.UserService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
+/**
+ * The class represents the command to edit user.
+ */
 public class EditUserCommand implements Command {
 
     private static final Logger LOGGER = LogManager.getLogger(EditUserCommand.class);
+
     private final UserService userService;
 
     public EditUserCommand(UserService userService) {

@@ -2,7 +2,6 @@ package app.web.controller.commands.container;
 
 import app.dao.DbException;
 import app.entity.Periodical;
-import app.entity.Topic;
 import app.web.controller.commands.Command;
 import app.web.controller.commands.CommandException;
 import app.web.service.interfacas.PeriodicalService;
@@ -12,13 +11,20 @@ import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.math.BigDecimal;
 
+import static app.util.Utility.validateData;
+
+/**
+ * The class represents the command to edit periodical.
+ */
 public class EditPeriodicalCommand implements Command {
 
-    private static final Logger LOGGER = LogManager.getLogger(AddPeriodicalCommand.class);
+    private static final Logger LOGGER = LogManager.getLogger(EditPeriodicalCommand.class);
 
     private final PeriodicalService periodicalService;
+
     private final ReaderAlertService readerAlertService;
 
     public EditPeriodicalCommand(PeriodicalService periodicalService, ReaderAlertService readerAlertService) {
@@ -28,33 +34,50 @@ public class EditPeriodicalCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws CommandException, DbException {
-        int id = Integer.parseInt(req.getParameter("id"));
-        Periodical periodical = periodicalService.getPeriodicalById(id);
+
+        Periodical periodical = null;
+        String engTitle = null;
+        String ukrTitle = null;
+        String engDescription = null;
+        String ukrDescription = null;
+        BigDecimal price = null;
+        int id = 0;
+
+        try {
+            id = Integer.parseInt(validateData(req.getParameter("id")));
+            periodical = periodicalService.getPeriodicalById(id);
+        } catch (DbException | IOException e) {
+            LOGGER.info("Cant get periodical"+ e);
+            throw new CommandException(e);
+        }
+
+        try {
+            engTitle = validateData( req.getParameter("engTitle"));
+            ukrTitle = validateData(req.getParameter("ukrTitle"));
+            engDescription = validateData(req.getParameter("engDescription"));
+            ukrDescription = validateData(req.getParameter("ukrDescription"));
+            price = new BigDecimal(validateData(req.getParameter("price")));
+        } catch (IOException e) {
+            LOGGER.error("Not enough data:"+engTitle+" "+ukrTitle+" "+engDescription+" "+ukrDescription+" "+ price +e);
+            throw new CommandException(e);
+        }
+        periodical.setEngTitle(engTitle);
+        periodical.setUkrTitle(ukrTitle);
+        periodical.setEngDescription(engDescription);
+        periodical.setUkrDescription(ukrDescription);
+        periodical.setPrice(price);
+        try {
+            periodicalService.updatePeriodical(periodical);
+        } catch (DbException e) {
+            LOGGER.info("Cant edit"+ e);
+            throw new CommandException(e);
+        }
+
         if (req.getParameter("issue") != null) {
             int issue = Integer.parseInt(req.getParameter("issue"));
             periodical.setIssue(issue);
             readerAlertService.update(periodical);
         }
-
-        if (req.getParameter("engTitle") != null) {
-            String engTitle = req.getParameter("engTitle");
-            String ukrTitle = req.getParameter("ukrTitle");
-            String engDescription = req.getParameter("engDescription");
-            String ukrDescription = req.getParameter("ukrDescription");
-            BigDecimal price = new BigDecimal(req.getParameter("price"));
-            periodical.setEngTitle(engTitle);
-            periodical.setUkrTitle(ukrTitle);
-            periodical.setEngDescription(engDescription);
-            periodical.setUkrDescription(ukrDescription);
-            periodical.setPrice(price);
-            try {
-                periodicalService.updatePeriodical(periodical);
-            } catch (DbException e) {
-                LOGGER.info("Not enough data:" + engTitle + " " + ukrTitle + " " + engDescription + " " + ukrDescription + " "  + price + e);
-                return "app?command=periodicalsForAdmin&wrong=1";
-            }
-        }
-
         return "app?command=periodicalsForAdmin&page=1";
     }
 }

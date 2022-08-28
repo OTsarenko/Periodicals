@@ -12,7 +12,7 @@ public interface TopicService {
 
     void deleteTopic(Topic topic)  throws DbException;
 
-    void updatePeriodical(Topic topic)  throws DbException;
+    void updateTopic(Topic topic)  throws DbException;
 
     Topic getTopicById (int id) throws DbException;
 

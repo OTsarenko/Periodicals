@@ -24,7 +24,7 @@ public interface PeriodicalService {
 
     List<Periodical> getPeriodicalsByTopic(Topic topic) throws DbException;
 
-    void setTopicForPeriodical(Topic topic, Periodical periodical) throws DbException;
+    void setTopicsForNewPeriodicalTransaction(Periodical periodical, Topic...topics) throws DbException;
 
     List<Periodical> getAllPeriodicalsByEngTitle(int page) throws DbException;
 

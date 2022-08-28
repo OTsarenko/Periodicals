@@ -25,7 +25,7 @@ public interface PeriodicalDAO {
 
     List<Periodical> getPeriodicalsByTopic(Topic topic) throws DbException;
 
-    boolean setTopicForPeriodical(Topic topic, Periodical periodical) throws DbException;
+    boolean setTopicForNewPeriodicalTransaction(Periodical periodical, Topic...topics) throws DbException;
     List<Periodical> getAllPeriodicalsByEngTitle(int offset) throws DbException;
     List<Periodical> getAllPeriodicalsByUkrTitle(int offset) throws DbException;
 

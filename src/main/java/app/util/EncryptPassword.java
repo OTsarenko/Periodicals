@@ -9,6 +9,11 @@ import javax.crypto.spec.PBEKeySpec;
 import java.security.SecureRandom;
 import java.util.Base64;
 
+/**
+ * Method used to hash user password.
+ *
+ * @return hashed password
+ */
 public class EncryptPassword {
 
     static final Logger LOG = LogManager.getLogger(EncryptPassword.class);

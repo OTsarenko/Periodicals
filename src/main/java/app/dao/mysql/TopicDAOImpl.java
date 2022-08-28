@@ -7,7 +7,6 @@ import app.util.ConnectionDataSource;
 import app.util.ConstantsQuery;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,7 +20,8 @@ import java.util.List;
 public class TopicDAOImpl implements TopicDAO {
 
     private static final Logger LOGGER = LogManager.getLogger(TopicDAOImpl.class);
-    Connection getConnection() {
+
+    public Connection getConnection() throws SQLException {
         return ConnectionDataSource.getInstance().getConnection();
     }
 
@@ -33,8 +33,8 @@ public class TopicDAOImpl implements TopicDAO {
             return preparedStatement.executeUpdate() != 0;
         } catch (SQLException e) {
             LOGGER.error("Can't insert topic:", e);
+            throw new DbException(e);
         }
-        return false;
     }
 
     @Override
@@ -45,8 +45,8 @@ public class TopicDAOImpl implements TopicDAO {
             return preparedStatement.executeUpdate() != 0;
         } catch (SQLException e) {
             LOGGER.error("Can't delete topic:", e);
+            throw new DbException(e);
         }
-        return false;
     }
 
     @Override
@@ -58,8 +58,8 @@ public class TopicDAOImpl implements TopicDAO {
             return preparedStatement.executeUpdate() != 0;
         } catch (SQLException e) {
             LOGGER.error("Can't update topic:", e);
+            throw new DbException(e);
         }
-        return false;
     }
 
     @Override
@@ -79,6 +79,29 @@ public class TopicDAOImpl implements TopicDAO {
 
         } catch (SQLException e) {
             LOGGER.error("Can't get topic by id:", e);
+            throw new DbException(e);
+        }
+        return null;
+    }
+
+
+    public Topic getTopicByEngTitle(String engTitle) throws DbException {
+
+        try (Connection con = getConnection();
+             PreparedStatement preparedStatement = con.prepareStatement(ConstantsQuery.GET_TOPIC_BY_ENG_NAME)) {
+            preparedStatement.setString(1, engTitle);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                Topic topic = new Topic();
+                topic.setId(resultSet.getInt("id"));
+                topic.setEngTopicName(resultSet.getString("name_eng"));
+                topic.setUkrTopicName(resultSet.getString("name_ukr"));
+                return topic;
+            }
+
+        } catch (SQLException e) {
+            LOGGER.error("Can't get topic by id:", e);
+            throw new DbException(e);
         }
         return null;
     }
@@ -99,6 +122,7 @@ public class TopicDAOImpl implements TopicDAO {
             }
         } catch (SQLException e) {
             LOGGER.error("Can't find all topics:", e);
+            throw new DbException(e);
         }
         return topics;
     }

@@ -36,8 +36,8 @@ public class UserDAOImpl implements UserDAO {
             return preparedStatement.executeUpdate() != 0;
         } catch (SQLException e) {
             LOGGER.error("Can't insert user:", e);
+            throw new DbException(e);
         }
-        return false;
     }
 
     @Override
@@ -48,8 +48,8 @@ public class UserDAOImpl implements UserDAO {
             return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             LOGGER.error("Can't delete user:", e);
+            throw new DbException(e);
         }
-        return false;
     }
 
     @Override
@@ -61,8 +61,8 @@ public class UserDAOImpl implements UserDAO {
             return preparedStatement.executeUpdate() != 0;
         } catch (SQLException e) {
             LOGGER.error("Can't update user:", e);
+            throw new DbException(e);
         }
-        return false;
     }
 
     @Override
@@ -78,6 +78,7 @@ public class UserDAOImpl implements UserDAO {
 
         } catch (SQLException e) {
             LOGGER.error("Can't get user by id:", e);
+            throw new DbException(e);
         }
         return null;
     }
@@ -94,6 +95,7 @@ public class UserDAOImpl implements UserDAO {
             }
         } catch (SQLException e) {
             LOGGER.error("Can't get user by login:", e);
+            throw new DbException(e);
         }
         return null;
     }
@@ -110,6 +112,7 @@ public class UserDAOImpl implements UserDAO {
             }
         } catch (SQLException e) {
             LOGGER.error("Can't get user by mail:", e);
+            throw new DbException(e);
         }
         return null;
     }
@@ -120,9 +123,10 @@ public class UserDAOImpl implements UserDAO {
 
         try (Connection con = getConnection();
              PreparedStatement preparedStatement = con.prepareStatement(ConstantsQuery.FIND_ALL_USERS)) {
-            return getUserListExecute(users, preparedStatement);
+            users = getUserListExecute(users, preparedStatement);
         } catch (SQLException e) {
             LOGGER.error("Can't find all users:", e);
+            throw new DbException(e);
         }
         return users;
     }

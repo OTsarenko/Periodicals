@@ -26,7 +26,7 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
-    public void updatePeriodical(Topic topic)  throws DbException {
+    public void updateTopic(Topic topic)  throws DbException {
         topicDAO.updateTopic(topic);
     }
 
