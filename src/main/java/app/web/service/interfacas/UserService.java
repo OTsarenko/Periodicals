@@ -2,6 +2,7 @@ package app.web.service.interfacas;
 
 import app.dao.DbException;
 import app.entity.Periodical;
+import app.entity.Subscribe;
 import app.entity.User;
 
 import java.util.List;
@@ -22,5 +23,5 @@ public interface UserService {
 
     List<User> findAllUsers()  throws DbException;
 
-    List<User> findUsersOfSubscribe(Periodical periodical)  throws DbException;
+    List<User> findUsersOfSubscribe(List<Subscribe> subscribeList)  throws DbException;
 }

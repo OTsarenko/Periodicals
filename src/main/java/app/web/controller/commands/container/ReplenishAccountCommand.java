@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
 
+/**
+ * The class represents the command to replenish account.
+ */
 public class ReplenishAccountCommand implements Command {
     private final UserService userService;
 

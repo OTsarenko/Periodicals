@@ -17,17 +17,18 @@ public class User implements Serializable, Observer {
     private String login;
     private String password;
     private String email;
-    private String facebook;
+    private String message;
     private BigDecimal account;
     private UserStatus status;
     private UserRole userRole;
     private UserLanguage language;
 
+
     /**
      * Constructor used to create absolute new system User without parameters
      */
     public User() {
-        this.facebook = null;
+        this.message = null;
         this.account = new BigDecimal(0);
         this.status = UserStatus.ACTIVE;
         this.userRole = UserRole.READER;
@@ -41,18 +42,18 @@ public class User implements Serializable, Observer {
      * @param login     user login
      * @param password  user password
      * @param email     user e-mail
-     * @param facebook  user facebook
+     * @param message   user message
      * @param account   user account
      * @param status    {@see apps.enums.UserStatus }
      * @param userRole  {@see apps.enums.UserRole}
      * @param language  {@see apps.enums.UserLanguage}
      */
-    public User(int id, String login, String password, String email, String facebook, BigDecimal account, UserStatus status, UserRole userRole, UserLanguage language) {
+    public User(int id, String login, String password, String email, String message, BigDecimal account, UserStatus status, UserRole userRole, UserLanguage language) {
         this.id = id;
         this.login = login;
         this.password = password;
         this.email = email;
-        this.facebook = facebook;
+        this.message = message;
         this.account = account;
         this.status = status;
         this.userRole = userRole;
@@ -75,9 +76,9 @@ public class User implements Serializable, Observer {
 
     public void setEmail(String email) {this.email = email;}
 
-    public String getFacebook() {return facebook;}
+    public String getMessage() {return message;}
 
-    public void setFacebook(String facebook) {this.facebook = facebook;}
+    public void setMessage(String message) {this.message = message;}
 
     public BigDecimal getAccount() {return account;}
 
@@ -128,8 +129,7 @@ public class User implements Serializable, Observer {
     @Override
     public void update(Event event) {
         String massage = (language == UserLanguage.UKR)?event.getAlertUkr():event.getAlertEng();
-        System.out.println("Email to " + email +":" + massage);
-        if(facebook != null) System.out.println("Massage to:" + facebook+":"+massage);
+        setMessage(massage);
     }
 
     @Override
@@ -138,7 +138,7 @@ public class User implements Serializable, Observer {
                 "id=" + id +
                 ", login='" + login + '\'' +
                 ", email='" + email + '\'' +
-                ", facebook='" + facebook + '\'' +
+                ", message='" + message + '\'' +
                 ", account=" + account +
                 ", status=" + status +
                 ", userRole=" + userRole +

@@ -9,6 +9,9 @@ import app.web.service.interfacas.PeriodicalService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * The class represents the command to go to subscribe form.
+ */
 public class SubscribeFormCommand implements Command {
 
     private final PeriodicalService periodicalService;

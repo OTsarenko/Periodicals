@@ -1,13 +1,11 @@
 package app.web.controller.commands.container;
 
 import app.dao.DbException;
-import app.entity.Subscribe;
 import app.entity.User;
 import app.util.EncryptPassword;
+import app.util.Utility;
 import app.web.controller.commands.Command;
 import app.web.controller.commands.CommandException;
-import app.web.service.interfacas.PeriodicalService;
-import app.web.service.interfacas.SubscribeService;
 import app.web.service.interfacas.UserService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -15,7 +13,7 @@ import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.List;
+import java.io.IOException;
 
 public class LogInCommand implements Command {
 
@@ -29,8 +27,15 @@ public class LogInCommand implements Command {
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws CommandException, DbException {
         HttpSession session = req.getSession();
-        String login = req.getParameter("login");
-        String password = req.getParameter("password");
+        String login = null;
+        String password = null;
+        try {
+            login = Utility.validateData(req.getParameter("login"));
+            password = Utility.validateData(req.getParameter("password"));
+        } catch (IOException e) {
+            LOGGER.info("Data is not valid");
+            throw new CommandException(e);
+        }
         User user = userService.getUserByLogin(login);
         if(user != null && EncryptPassword.check(password, user.getPassword()) && !user.isBlocked()) {
             session.setAttribute("user", user);

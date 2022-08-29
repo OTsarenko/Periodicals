@@ -7,25 +7,21 @@ import app.web.controller.commands.Command;
 import app.web.controller.commands.CommandException;
 import app.web.service.interfacas.PeriodicalService;
 import app.web.service.interfacas.SubscribeService;
-import app.web.service.interfacas.UserService;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+/**
+ * The class represents the command to edit user.
+ */
 public class SubscribeCommand implements Command {
 
     private final SubscribeService subscribeService;
 
-    private final UserService userService;
-
     private final PeriodicalService periodicalService;
 
-    public SubscribeCommand(SubscribeService subscribeService, UserService userService, PeriodicalService periodicalService) {
+    public SubscribeCommand(SubscribeService subscribeService,  PeriodicalService periodicalService) {
         this.subscribeService = subscribeService;
-        this.userService = userService;
         this.periodicalService = periodicalService;
     }
 

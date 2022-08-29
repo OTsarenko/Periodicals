@@ -61,7 +61,7 @@ public class ContextListener implements ServletContextListener, HttpSessionListe
         context.setAttribute("subscribeService", subscribeService);
         LOGGER.trace("context.setAttribute 'addSubscribeService': "+subscribeService);
 
-        UserService userService = new UserServiceImpl(userDAO, subscribeDAO);
+        UserService userService = new UserServiceImpl(userDAO);
         context.setAttribute("userService", userService);
         LOGGER.trace("context.setAttribute 'addUserService': "+userService);
 
@@ -69,7 +69,7 @@ public class ContextListener implements ServletContextListener, HttpSessionListe
         context.setAttribute("topicService", topicService);
         LOGGER.trace("context.setAttribute 'addTopicService': "+topicService);
 
-        ReaderAlertService readerAlertService = new ReaderAlertServiceImpl(periodicalDao, userService);
+        ReaderAlertService readerAlertService = new ReaderAlertServiceImpl(periodicalDao, userService, subscribeService);
         context.setAttribute("readerAlertService", readerAlertService);
         LOGGER.trace("context.setAttribute 'addService': "+readerAlertService);
 
@@ -97,6 +97,8 @@ public class ContextListener implements ServletContextListener, HttpSessionListe
         commands.addCommand("editPeriodicalForm", command);
         command = new EditPeriodicalCommand(periodicalService, readerAlertService);
         commands.addCommand("editPeriodical", command);
+        command = new EditIssueCommand(periodicalService, readerAlertService);
+        commands.addCommand("editIssue", command);
         command = new ErrorCommand();
         commands.addCommand("error", command);
         command = new EditUserCommand(userService);
@@ -113,7 +115,7 @@ public class ContextListener implements ServletContextListener, HttpSessionListe
         commands.addCommand("logOut", command);
         command = new PeriodicalsByTopicCommand(topicService, periodicalService);
         commands.addCommand("periodicalsByTopic", command);
-        command = new PersonalAccountCommand(subscribeService, userService, periodicalService);
+        command = new PersonalAccountCommand(subscribeService, periodicalService);
         commands.addCommand("personalAccount", command);
         command = new RegistrationCommand(subscribeService,userService);
         commands.addCommand("registration", command);
@@ -121,7 +123,7 @@ public class ContextListener implements ServletContextListener, HttpSessionListe
         commands.addCommand("registrationForm", command);
         command = new ReplenishAccountCommand(userService);
         commands.addCommand("replenishAccount", command);
-        command = new SubscribeCommand(subscribeService, userService, periodicalService);
+        command = new SubscribeCommand(subscribeService, periodicalService);
         commands.addCommand("subscribe", command);
         command = new SubscribeFormCommand(periodicalService);
         commands.addCommand("subscribeForm", command);

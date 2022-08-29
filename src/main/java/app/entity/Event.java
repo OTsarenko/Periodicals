@@ -6,12 +6,15 @@ package app.entity;
 public class Event {
 
     private Periodical periodical;
-    private final int eventType = periodical.getId();
-    private String alertUkr = "Вас чекає новий випуск:" + periodical.getUkrTitle();
-    private String alertEng = "You are checked for a new issue:" + periodical.getEngTitle();
+    private final int eventType;
+    private String alertUkr;
+    private String alertEng;
 
     public Event(Periodical periodical) {
         this.periodical = periodical;
+        eventType = periodical.getId();
+        alertUkr = "Вас чекає новий випуск: " + periodical.getUkrTitle();
+        alertEng = "You are checked for a new issue: " + periodical.getEngTitle();
     }
 
     public Periodical getPeriodical() {

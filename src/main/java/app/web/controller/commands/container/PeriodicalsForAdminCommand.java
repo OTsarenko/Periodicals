@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
+/**
+ * The class represents the command to get periodicals for admin.
+ */
 public class PeriodicalsForAdminCommand implements Command {
 
     private final PeriodicalService periodicalService;
@@ -25,10 +28,8 @@ public class PeriodicalsForAdminCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws CommandException, DbException {
-        int page;
-        if (req.getParameter("page") == null) {
-            page = 1;
-        } else{
+        int page = 1;
+        if (req.getParameter("page") != null) {
             page = Integer.parseInt(req.getParameter("page"));
         }
         List<Periodical> periodicals = periodicalService.getAllPeriodicalsByPrice(page);

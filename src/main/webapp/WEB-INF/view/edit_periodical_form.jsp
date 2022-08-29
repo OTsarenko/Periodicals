@@ -40,7 +40,7 @@
 <fieldset style="margin-left: 2%; border: 1px solid black; padding: 2px 550px;">
     <legend style="font-size: x-large"><fmt:message key="label.nextIssue" /></legend>
     <form action="app" method="post">
-        <input type="hidden" name="command" value="editPeriodical"><br>
+        <input type="hidden" name="command" value="editIssue"><br>
         <input type="hidden" name="id" value="${periodical.id}"><br>
         <label for="issue"><fmt:message key="label.nextIssue" /></label>
         <input type="checkbox" checked name="issue" value="${periodical.issue +1}"  id="issue"/><br/>

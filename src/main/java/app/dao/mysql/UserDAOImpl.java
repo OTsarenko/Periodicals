@@ -135,7 +135,7 @@ public class UserDAOImpl implements UserDAO {
         preparedStatement.setString(1, user.getLogin());
         preparedStatement.setString(2, user.getPassword());
         preparedStatement.setString(3, user.getEmail());
-        preparedStatement.setString(4, user.getFacebook());
+        preparedStatement.setString(4, user.getMessage());
         preparedStatement.setBigDecimal(5, user.getAccount());
         preparedStatement.setString(6, user.getStatus().name());
         preparedStatement.setString(7, user.getUserRole().name());
@@ -148,7 +148,7 @@ public class UserDAOImpl implements UserDAO {
             user.setLogin(resultSet.getString("login"));
             user.setPassword(resultSet.getString("password"));
             user.setEmail(resultSet.getString("email"));
-            user.setFacebook(resultSet.getString("facebook"));
+            user.setMessage(resultSet.getString("facebook"));
             user.setAccount(resultSet.getBigDecimal("account"));
             user.setStatus(UserStatus.valueOf(resultSet.getString("status")));
             user.setUserRole(UserRole.valueOf(resultSet.getString("r")));

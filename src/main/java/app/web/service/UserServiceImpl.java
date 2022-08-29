@@ -13,11 +13,9 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final UserDAO userDAO;
-    private final SubscribeDAO subscribeDAO;
 
-    public UserServiceImpl(UserDAO userDAO, SubscribeDAO subscribeDAO) {
+    public UserServiceImpl(UserDAO userDAO) {
         this.userDAO = userDAO;
-        this.subscribeDAO = subscribeDAO;
     }
 
     @Override
@@ -56,9 +54,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findUsersOfSubscribe(Periodical periodical)  throws DbException {
+    public List<User> findUsersOfSubscribe( List<Subscribe> subscribeList)  throws DbException {
         List<User> users = new ArrayList<>();
-        List<Subscribe> subscribeList = subscribeDAO.getSubscribesByPeriodical(periodical);
         List<User> allUsers = userDAO.findAllUsers();
 
             for (Subscribe s: subscribeList) {

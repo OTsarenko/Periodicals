@@ -72,12 +72,6 @@ public class EditPeriodicalCommand implements Command {
             LOGGER.info("Cant edit"+ e);
             throw new CommandException(e);
         }
-
-        if (req.getParameter("issue") != null) {
-            int issue = Integer.parseInt(req.getParameter("issue"));
-            periodical.setIssue(issue);
-            readerAlertService.update(periodical);
-        }
         return "app?command=periodicalsForAdmin&page=1";
     }
 }

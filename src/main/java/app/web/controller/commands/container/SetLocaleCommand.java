@@ -6,11 +6,13 @@ import app.enums.UserLanguage;
 import app.web.controller.commands.Command;
 import app.web.controller.commands.CommandException;
 import app.web.service.interfacas.UserService;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+/**
+ * The class represents the command to set locale.
+ */
 public class SetLocaleCommand implements Command {
 
     private final UserService userService;

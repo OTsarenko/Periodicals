@@ -53,6 +53,8 @@ public class SubscribeServiceImpl implements SubscribeService {
         for (Subscribe s: subscribes){
             if(isActive(s)) {
                 activeSubscribes.add(s);
+            } else {
+                subscribeDAO.deleteSubscribeById(s);
             }
         }
         return activeSubscribes;

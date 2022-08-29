@@ -40,7 +40,6 @@
     <img src="photo/006.png" alt="User" style="width: 10%; margin-right: 5%">
     <fmt:message key="label.login" />: <c:out value="${sessionScope.user.login}"/><br>
     E-mail: <c:out value="${sessionScope.user.email}"/><br>
-    Facebook: <c:out value="${sessionScope.user.facebook}"/><br>
     <fmt:message key="label.language" />:<c:out value="${sessionScope.user.language}"/><br>
     <fmt:message key="label.role" />:<c:out value="${sessionScope.user.userRole}"/><br>
     <fmt:message key="label.account" />:<c:out value="${sessionScope.user.account}"/><br>
@@ -56,8 +55,6 @@
         <p style="margin-left: 3%; font-size: small"><fmt:message key="label.valid"/></p>
         <label for="email">E-mail</label>
         <input type="email" name="email" id="email"/><br/>
-        <label for="facebook">Facebook</label>
-        <input type="text" name="facebook" id="facebook"/><br/>
         <label for="language"><fmt:message key="label.language" /></label>
         <input type="radio" name="language" value="ENG" id="language"  />ENG
         <input type="radio" name="language" value="UKR" id="language" checked />UKR<br/>
@@ -86,6 +83,9 @@
         </c:if>
     </form>
 </fieldset>
+<c:if test="${sessionScope.user.message != null}">
+    <h2 style="text-align: center"><c:out value="${sessionScope.user.message}"/></h2>
+</c:if>
 <c:if test="${periodicals != null}">
 <table style="width: 99%; margin-bottom: 5%; background-color: rgba(232, 216, 189, 0.87); margin-top: 2%" class="periodicals">
     <caption style="font-size: x-large"><fmt:message key="label.subscribes"/></caption>
@@ -102,9 +102,6 @@
         </tr>
     </c:forEach>
 </table>
-</c:if>
-<c:if test="${periodicals == null}">
-    <h2 style="float: left"><fmt:message key="label.periodicals"/></h2>
 </c:if>
 </body>
 </html>
