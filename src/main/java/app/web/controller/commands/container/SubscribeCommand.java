@@ -20,6 +20,12 @@ public class SubscribeCommand implements Command {
 
     private final PeriodicalService periodicalService;
 
+    /**
+     * The constructor used to initialize services.
+     *
+     * @param periodicalService    {@see app.web.service.PeriodicalServiceImpl}
+     * @param subscribeService     {@see app.web.service.SubscribeServiceImpl}
+     */
     public SubscribeCommand(SubscribeService subscribeService,  PeriodicalService periodicalService) {
         this.subscribeService = subscribeService;
         this.periodicalService = periodicalService;

@@ -5,7 +5,6 @@ import app.entity.Periodical;
 import app.web.controller.commands.Command;
 import app.web.controller.commands.CommandException;
 import app.web.service.interfacas.PeriodicalService;
-import app.web.service.interfacas.ReaderAlertService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -25,11 +24,13 @@ public class EditPeriodicalCommand implements Command {
 
     private final PeriodicalService periodicalService;
 
-    private final ReaderAlertService readerAlertService;
-
-    public EditPeriodicalCommand(PeriodicalService periodicalService, ReaderAlertService readerAlertService) {
+    /**
+     * The constructor used to initialize services.
+     *
+     * @param periodicalService    {@see app.web.service.PeriodicalServiceImpl}
+     */
+    public EditPeriodicalCommand(PeriodicalService periodicalService) {
         this.periodicalService = periodicalService;
-        this.readerAlertService = readerAlertService;
     }
 
     @Override

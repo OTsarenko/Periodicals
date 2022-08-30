@@ -13,12 +13,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
+/**
+ * The class represents the command to find periodicals by topic.
+ */
 public class PeriodicalsByTopicCommand implements Command {
 
     private final TopicService topicService;
 
     private final PeriodicalService periodicalService;
 
+    /**
+     * The constructor used to initialize services.
+     *
+     * @param periodicalService    {@see app.web.service.PeriodicalServiceImpl}
+     * @param topicService         {@see app.web.service.TopicServiceImpl}
+     */
     public PeriodicalsByTopicCommand(TopicService topicService, PeriodicalService periodicalService) {
         this.topicService = topicService;
         this.periodicalService = periodicalService;

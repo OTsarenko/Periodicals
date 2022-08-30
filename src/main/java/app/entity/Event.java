@@ -13,8 +13,8 @@ public class Event {
     public Event(Periodical periodical) {
         this.periodical = periodical;
         eventType = periodical.getId();
-        alertUkr = "Вас чекає новий випуск: " + periodical.getUkrTitle();
-        alertEng = "You are checked for a new issue: " + periodical.getEngTitle();
+        alertUkr = "Вас чекає новий випуск: " + "«"+ periodical.getUkrTitle()+"»";
+        alertEng = "You are checked for a new issue: "+ "«" + periodical.getEngTitle()+"»";
     }
 
     public Periodical getPeriodical() {

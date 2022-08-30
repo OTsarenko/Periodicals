@@ -17,6 +17,11 @@ import java.math.BigDecimal;
 public class ReplenishAccountCommand implements Command {
     private final UserService userService;
 
+    /**
+     * The constructor used to initialize services.
+     *
+     * @param userService          {@see app.web.service.UserServiceImpl}
+     */
     public ReplenishAccountCommand(UserService userService) {
         this.userService = userService;
     }

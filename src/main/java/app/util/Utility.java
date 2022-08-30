@@ -37,6 +37,6 @@ public final class Utility {
      */
     public static String validateData (String str) throws IOException {
         if(str != null && !str.equals("")) return str;
-        throw new IOException("Data not valid");
+        throw new IOException("Data is invalid");
     }
 }

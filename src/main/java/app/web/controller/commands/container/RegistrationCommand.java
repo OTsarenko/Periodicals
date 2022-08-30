@@ -28,6 +28,12 @@ public class RegistrationCommand implements Command {
 
     private final UserService userService;
 
+    /**
+     * The constructor used to initialize services.
+     *
+     * @param userService          {@see app.web.service.UserServiceImpl}
+     * @param subscribeService     {@see app.web.service.SubscribeServiceImpl}
+     */
     public RegistrationCommand(SubscribeService subscribeService, UserService userService) {
         this.subscribeService = subscribeService;
         this.userService = userService;

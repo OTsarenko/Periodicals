@@ -23,6 +23,12 @@ public class FindPeriodicalByTitleCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger(FindPeriodicalByTitleCommand.class);
 
     private final PeriodicalService periodicalService;
+
+    /**
+     * The constructor used to initialize services.
+     *
+     * @param periodicalService    {@see app.web.service.PeriodicalServiceImpl}
+     */
     public FindPeriodicalByTitleCommand(PeriodicalService periodicalService) {
         this.periodicalService = periodicalService;
     }
@@ -34,8 +40,12 @@ public class FindPeriodicalByTitleCommand implements Command {
         try {
             title = Utility.validateData(req.getParameter("title"));
         } catch (IOException e) {
-            LOGGER.error("Cant get parameter"+e);
-            throw new CommandException("Data not valid" +e);
+            LOGGER.error("Cannot get parameter"+e);
+            try {
+                resp.sendError(400, "Data is invalid");
+            } catch (IOException ex) {
+                throw new CommandException(ex);
+            }
         }
         Periodical p1 = periodicalService.getPeriodicalByEngTitle(title);
         Periodical p2 = periodicalService.getPeriodicalByUkrTitle(title);

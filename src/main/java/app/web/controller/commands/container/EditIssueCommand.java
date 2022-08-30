@@ -26,6 +26,12 @@ public class EditIssueCommand implements Command {
 
     private final ReaderAlertService readerAlertService;
 
+    /**
+     * The constructor used to initialize services.
+     *
+     * @param periodicalService    {@see app.web.service.PeriodicalServiceImpl}
+     * @param readerAlertService   {@see app.web.service.ReaderAlertServiceImpl}
+     */
     public EditIssueCommand(PeriodicalService periodicalService, ReaderAlertService readerAlertService) {
         this.periodicalService = periodicalService;
         this.readerAlertService = readerAlertService;

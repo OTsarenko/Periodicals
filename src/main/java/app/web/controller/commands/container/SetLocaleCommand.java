@@ -17,6 +17,11 @@ public class SetLocaleCommand implements Command {
 
     private final UserService userService;
 
+    /**
+     * The constructor used to initialize services.
+     *
+     * @param userService          {@see app.web.service.UserServiceImpl}
+     */
     public SetLocaleCommand(UserService userService) {
         this.userService = userService;
     }

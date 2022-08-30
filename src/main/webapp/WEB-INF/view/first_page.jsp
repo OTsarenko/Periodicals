@@ -43,7 +43,7 @@
 <form action="app" method="get" >
     <img src="photo/005.png" alt="Периодика" width="25%" style="float:right; margin-right:10%;">
     <input type="hidden" name="command" value="findPeriodical"><br>
-    <input type="search" name="title" minlength="1" placeholder="   ">
+    <input type="search" name="title" minlength="1" maxlength="255" placeholder="   ">
     <button type="submit"><fmt:message key="label.search" /></button>
 </form>
 <div style="margin-left: 3%">

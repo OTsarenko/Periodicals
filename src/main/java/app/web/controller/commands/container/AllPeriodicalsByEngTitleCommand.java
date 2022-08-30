@@ -19,6 +19,12 @@ public class AllPeriodicalsByEngTitleCommand implements Command {
 
     private static final Logger LOGGER = LogManager.getLogger(AllPeriodicalsByEngTitleCommand.class);
     private final PeriodicalService periodicalService;
+
+    /**
+     * The constructor used to initialize services.
+     *
+     * @param periodicalService    {@see app.web.service.PeriodicalServiceImpl}
+     */
     public AllPeriodicalsByEngTitleCommand(PeriodicalService periodicalService) {
         this.periodicalService = periodicalService;
     }

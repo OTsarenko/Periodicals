@@ -27,6 +27,12 @@ public class AddPeriodicalCommand implements Command {
     private final PeriodicalService periodicalService;
     private final TopicService topicService;
 
+    /**
+     * The constructor used to initialize services.
+     *
+     * @param periodicalService    {@see app.web.service.PeriodicalServiceImpl}
+     * @param topicService         {@see app.web.service.TopicServiceImpl}
+     */
     public AddPeriodicalCommand(PeriodicalService periodicalService, TopicService topicService) {
         this.periodicalService = periodicalService;
         this.topicService = topicService;
@@ -48,7 +54,11 @@ public class AddPeriodicalCommand implements Command {
             price = new BigDecimal(validateData(req.getParameter("price")));
         } catch (IOException e) {
             LOGGER.error("Not enough data:"+engTitle+" "+ukrTitle+" "+engDescription+" "+ukrDescription+" "+issue+" "+price +e);
-            throw new CommandException(e);
+            try {
+                resp.sendError(400, "Data is not valid");
+            } catch (IOException ex) {
+                throw new CommandException(ex);
+            }
         }
 
         String[] topicList = req.getParameterValues("topic");

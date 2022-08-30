@@ -19,6 +19,11 @@ public class UnblockingUserCommand implements Command {
 
     private final UserService userService;
 
+    /**
+     * The constructor used to initialize services.
+     *
+     * @param userService          {@see app.web.service.UserServiceImpl}
+     */
     public UnblockingUserCommand(UserService userService) {
         this.userService = userService;
     }

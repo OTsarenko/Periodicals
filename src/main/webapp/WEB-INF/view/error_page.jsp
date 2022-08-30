@@ -9,6 +9,11 @@
 <head>
     <title><fmt:message key="label.error"/></title>
     <link href="css/styles.css" rel="stylesheet" type="text/css">
+    <style>
+        body {
+            background-color: rgba(232, 216, 189, 0.87);
+        }
+    </style>
 </head>
 <body>
 <c:if test="${user == null}">
@@ -20,24 +25,18 @@
 <table>
     <tr >
         <td>
-            <h2><fmt:message key="label.wrong"/></h2>
-            <c:set var="exception" value="${requestScope['javax.servlet.error.exception']}"/>
-            <p>${exception.getMessage() }</p>
+            <h1><fmt:message key="label.wrong"/></h1>
+
             <c:if test="${wrong == '101' }">
                 <h2><fmt:message key="label.access"/></h2>
             </c:if>
             <c:set var="code" value="${requestScope['javax.servlet.error.status_code']}"/>
-            <c:set var="message" value="${requestScope['javax.servlet.error.message']}"/>
+
 
 
             <c:if test="${not empty code}">
-                <h3>Error code: ${code}</h3>
+                <h3><fmt:message key="label.try"/></h3>
             </c:if>
-
-            <c:if test="${not empty message}">
-                <h3>Message: ${message}</h3>
-            </c:if>
-
         </td>
     </tr>
 </table>

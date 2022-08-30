@@ -20,6 +20,11 @@ public class BlockingUserCommand implements Command {
 
     private final UserService userService;
 
+    /**
+     * The constructor used to initialize services.
+     *
+     * @param userService          {@see app.web.service.UserServiceImpl}
+     */
     public BlockingUserCommand(UserService userService) {
         this.userService = userService;
     }

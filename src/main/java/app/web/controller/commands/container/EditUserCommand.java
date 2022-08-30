@@ -24,6 +24,11 @@ public class EditUserCommand implements Command {
 
     private final UserService userService;
 
+    /**
+     * The constructor used to initialize services.
+     *
+     * @param userService          {@see app.web.service.UserServiceImpl}
+     */
     public EditUserCommand(UserService userService) {
         this.userService = userService;
     }

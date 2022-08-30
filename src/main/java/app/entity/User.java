@@ -44,9 +44,9 @@ public class User implements Serializable, Observer {
      * @param email     user e-mail
      * @param message   user message
      * @param account   user account
-     * @param status    {@see apps.enums.UserStatus }
-     * @param userRole  {@see apps.enums.UserRole}
-     * @param language  {@see apps.enums.UserLanguage}
+     * @param status    {@see app.enums.UserStatus }
+     * @param userRole  {@see app.enums.UserRole}
+     * @param language  {@see app.enums.UserLanguage}
      */
     public User(int id, String login, String password, String email, String message, BigDecimal account, UserStatus status, UserRole userRole, UserLanguage language) {
         this.id = id;

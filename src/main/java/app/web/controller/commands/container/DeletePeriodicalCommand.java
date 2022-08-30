@@ -20,6 +20,11 @@ public class DeletePeriodicalCommand implements Command {
 
     private final PeriodicalService periodicalService;
 
+    /**
+     * The constructor used to initialize services.
+     *
+     * @param periodicalService    {@see app.web.service.PeriodicalServiceImpl}
+     */
     public DeletePeriodicalCommand(PeriodicalService periodicalService) {
         this.periodicalService = periodicalService;
     }

@@ -21,6 +21,12 @@ public class PeriodicalsForAdminCommand implements Command {
     private final PeriodicalService periodicalService;
     private final TopicService topicService;
 
+    /**
+     * The constructor used to initialize services.
+     *
+     * @param periodicalService    {@see app.web.service.PeriodicalServiceImpl}
+     * @param topicService         {@see app.web.service.TopicServiceImpl}
+     */
     public PeriodicalsForAdminCommand(PeriodicalService periodicalService, TopicService topicService) {
         this.periodicalService = periodicalService;
         this.topicService = topicService;

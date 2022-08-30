@@ -95,7 +95,7 @@ public class ContextListener implements ServletContextListener, HttpSessionListe
         commands.addCommand("deletePeriodical", command);
         command = new EditPeriodicalFormCommand(periodicalService);
         commands.addCommand("editPeriodicalForm", command);
-        command = new EditPeriodicalCommand(periodicalService, readerAlertService);
+        command = new EditPeriodicalCommand(periodicalService);
         commands.addCommand("editPeriodical", command);
         command = new EditIssueCommand(periodicalService, readerAlertService);
         commands.addCommand("editIssue", command);

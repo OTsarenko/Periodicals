@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ControllerTest {
+class ControllerTest {
 
     CommandContainer commandContainer = new CommandContainer();
     Command mockCommand = new Command() {

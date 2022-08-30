@@ -1,6 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="m" uri="/WEB-INF/custom.tld"  %>
 <fmt:setLocale value="${theLocale}"/>
 <fmt:setBundle basename="messages"/>
 
@@ -83,8 +85,10 @@
         </c:if>
     </form>
 </fieldset>
+
 <c:if test="${sessionScope.user.message != null}">
-    <h2 style="text-align: center"><c:out value="${sessionScope.user.message}"/></h2>
+    <m:MyTag />
+    <my:message>${sessionScope.user.id}</my:message>
 </c:if>
 <c:if test="${periodicals != null}">
 <table style="width: 99%; margin-bottom: 5%; background-color: rgba(232, 216, 189, 0.87); margin-top: 2%" class="periodicals">
@@ -96,9 +100,16 @@
     </tr>
     <c:forEach var="periodicals" items="${periodicals}">
         <tr>
+            <c:if test="${theLocale != 'uk'}">
             <td><c:out value="${periodicals.getEngTitle()}"/></td>
             <td><c:out value="${periodicals.getEngDescription()}"/></td>
             <td><c:out value="${periodicals.getIssue()}"/></td>
+            </c:if>
+            <c:if test="${theLocale == 'uk'}">
+            <td><c:out value="${periodicals.getUkrTitle()}"/></td>
+            <td><c:out value="${periodicals.getUkrDescription()}"/></td>
+            <td><c:out value="${periodicals.getIssue()}"/></td>
+            </c:if>
         </tr>
     </c:forEach>
 </table>

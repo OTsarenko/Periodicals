@@ -21,6 +21,11 @@ public class AllUsersCommand implements Command {
 
     private final UserService userService;
 
+    /**
+     * The constructor used to initialize services.
+     *
+     * @param userService          {@see app.web.service.UserServiceImpl}
+     */
     public AllUsersCommand(UserService userService) {
         this.userService = userService;
     }

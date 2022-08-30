@@ -15,12 +15,20 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * The class represents the command to log in user.
+ */
 public class LogInCommand implements Command {
 
     private static final Logger LOGGER = LogManager.getLogger(LogInCommand.class);
 
     private final UserService userService;
 
+    /**
+     * The constructor used to initialize services.
+     *
+     * @param userService          {@see app.web.service.UserServiceImpl}
+     */
     public LogInCommand(UserService userService) {
         this.userService = userService;
     }
