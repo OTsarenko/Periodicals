@@ -7,6 +7,7 @@ import app.enums.UserStatus;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Objects;
 
 /**
  * Class that represents User entity in system.
@@ -130,6 +131,19 @@ public class User implements Serializable, Observer {
     public void update(Event event) {
         String massage = (language == UserLanguage.UKR)?event.getAlertUkr():event.getAlertEng();
         setMessage(massage);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id == user.id && Objects.equals(login, user.login) && Objects.equals(password, user.password) && Objects.equals(email, user.email) && Objects.equals(message, user.message) && Objects.equals(account, user.account) && status == user.status && userRole == user.userRole && language == user.language;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, login, password, email, message, account, status, userRole, language);
     }
 
     @Override

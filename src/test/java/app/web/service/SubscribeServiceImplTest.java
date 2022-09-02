@@ -51,26 +51,18 @@ class SubscribeServiceImplTest {
 
     @Test
     void deleteSubscribeById() {
-        try {
-            subscribeService.deleteSubscribeById(new Subscribe());
-        } catch (DbException e) {
-            fail("Cannot insert");
-        }
+        MyAssertions.assertDoesNotThrow(() -> subscribeService.deleteSubscribeById(new Subscribe()));
     }
 
     @Test
     void updateSubscribe() {
-        try {
-            subscribeService.updateSubscribe(new Subscribe());
-        } catch (DbException e) {
-            fail("Cannot insert");
-        }
+            MyAssertions.assertDoesNotThrow(() -> subscribeService.updateSubscribe(new Subscribe()));
     }
 
     @Test
     void getSubscribes() {
         try {
-            assertEquals(null, subscribeService.getSubscribesByPeriodical(new Periodical()));
+            assertNull(subscribeService.getSubscribesByPeriodical(new Periodical()));
         } catch (DbException e) {
             fail("Cannot get subscribes", e);
         }
@@ -79,7 +71,7 @@ class SubscribeServiceImplTest {
     @Test
     void getSubscribeByID() {
         try {
-            assertEquals(null, subscribeService.getSubscribeByID(new Subscribe()));
+            assertNull(subscribeService.getSubscribeByID(new Subscribe()));
         } catch (DbException e) {
             fail("Cannot get subscribe", e);
         }

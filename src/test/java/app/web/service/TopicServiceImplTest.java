@@ -43,35 +43,25 @@ class TopicServiceImplTest {
 
     @Test
     void insert() {
-        try {
-            topicService.insertTopic(new Topic());
-        } catch (DbException e) {
-            fail("Cannot insert");
-        }
+        MyAssertions.assertDoesNotThrow(() -> {topicService.insertTopic(new Topic());});
     }
 
     @Test
     void delete() {
-        try {
-            topicService.deleteTopic(new Topic());
-        } catch (DbException e) {
-            fail("Cannot delete");
-        }
+            MyAssertions.assertDoesNotThrow(() -> {topicService.deleteTopic(new Topic());});
     }
 
     @Test
     void update() {
-        try {
-           topicService.updateTopic(new Topic());
-        } catch (DbException e) {
-            fail("Cannot update");
-        }
+            MyAssertions.assertDoesNotThrow(() -> {topicService.updateTopic(new Topic());});
     }
 
     @Test
     void getTopic() {
         try {
-            assertEquals(null, topicService.getTopicById(1));
+            assertNull(topicService.getTopicById(1));
+            assertNull(topicService.getTopicById(2));
+            assertNull(topicService.getTopicById(3));
         } catch (DbException e) {
             fail("Cannot get topic", e);
         }
@@ -80,7 +70,7 @@ class TopicServiceImplTest {
     @Test
     void getAllTopics() {
         try {
-            assertEquals(null, topicService.getAllTopics());
+            assertNull(topicService.getAllTopics());
         } catch (DbException e) {
             fail("Cannot get all topics");
         }

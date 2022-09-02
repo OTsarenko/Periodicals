@@ -176,7 +176,7 @@ public class PeriodicalDAOImpl implements PeriodicalDAO {
             e.printStackTrace();
             rollback(connection);
             LOGGER.error("Can't set topics for periodical:", e);
-            throw new DbException();
+            throw new DbException(e);
         } finally {
             close(connection);
         }

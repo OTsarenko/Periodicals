@@ -32,7 +32,6 @@
         <th>ID</th>
         <th><fmt:message key="label.login"/></th>
         <th>E-mail</th>
-        <th>Facebook</th>
         <th><fmt:message key="label.language"/></th>
         <th><fmt:message key="label.role"/></th>
         <th><fmt:message key="label.status"/></th>
@@ -42,7 +41,6 @@
             <td><c:out value="${users.id}"/></td>
             <td><c:out value="${users.login}"/></td>
             <td><c:out value="${users.email}"/></td>
-            <td><c:out value="${users.facebook}"/></td>
             <td><c:out value="${users.language}"/></td>
             <td><c:out value="${users.userRole}"/></td>
             <td><c:out value="${users.status}"/></td>

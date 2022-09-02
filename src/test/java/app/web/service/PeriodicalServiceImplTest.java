@@ -13,10 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class PeriodicalServiceImplTest {
+class PeriodicalServiceImplTest {
 
     PeriodicalDAO mockPeriodicalDao = new PeriodicalDAO() {
         @Override
@@ -99,37 +98,29 @@ public class PeriodicalServiceImplTest {
 
     @Test
     void insertPeriodical() {
-        try {
-            periodicalService.insertPeriodical(new Periodical());
-        } catch (DbException e) {
-            fail("Cannot insert");
-        }
+        MyAssertions.assertDoesNotThrow(() -> periodicalService.insertPeriodical(new Periodical()));
     }
 
     @Test
     void updatePeriodical(){
-        try {
-            periodicalService.updatePeriodical(new Periodical());
-        } catch (DbException e) {
-            fail("Cannot update");
-        }
+            MyAssertions.assertDoesNotThrow(() -> periodicalService.updatePeriodical(new Periodical()));
     }
 
     @Test
     void deletePeriodical(){
-        try {
-            periodicalService.deletePeriodical(1);
-        } catch (DbException e) {
-            fail("Cannot delete");
-        }
+        MyAssertions.assertDoesNotThrow(() -> periodicalService.deletePeriodical(1));
+        MyAssertions.assertDoesNotThrow(() -> periodicalService.deletePeriodical(2));
     }
 
     @Test
     void getPeriodical(){
         try {
-            assertEquals(null, periodicalService.getPeriodicalById(1));
-            assertEquals(null, periodicalService.getPeriodicalByEngTitle("testTitle"));
-            assertEquals(null, periodicalService.getPeriodicalByUkrTitle("тестоваНазва"));
+            assertNull(periodicalService.getPeriodicalById(1));
+            assertNull(periodicalService.getPeriodicalById(2));
+            assertNull(periodicalService.getPeriodicalByEngTitle("testTitle"));
+            assertNull(periodicalService.getPeriodicalByEngTitle("test2Title"));
+            assertNull(periodicalService.getPeriodicalByUkrTitle("тестоваНазва"));
+            assertNull(periodicalService.getPeriodicalByUkrTitle("тестоваНазва2"));
         } catch (DbException e) {
             fail("Cannot get periodical", e);
         }
@@ -137,22 +128,18 @@ public class PeriodicalServiceImplTest {
 
     @Test
     void setTopicsForNewPeriodicalTransaction(){
-        try {
-            periodicalService.setTopicsForNewPeriodicalTransaction(new Periodical(), new Topic[]{});
-        } catch (DbException e) {
-            fail("Cannot set", e);
-        }
+        MyAssertions.assertDoesNotThrow(() -> periodicalService.setTopicsForNewPeriodicalTransaction(new Periodical(), new Topic[]{}));
     }
 
     @Test
     void getAllPeriodicals(){
         try {
-            assertEquals(null, periodicalService.getAllPeriodicals());
-            assertEquals(null, periodicalService.getAllPeriodicalsByEngTitle(1));
-            assertEquals(null, periodicalService.getAllPeriodicalsByUkrTitle(1));
-            assertEquals(null, periodicalService.getAllPeriodicalsByPrice(1));
-            assertEquals(null, periodicalService.getAllPeriodicalsBySubscribes(new ArrayList<>()));
-            assertEquals(null, periodicalService.getAllPeriodicalsByTopics(new ArrayList<>()));
+            assertNull(periodicalService.getAllPeriodicals());
+            assertNull(periodicalService.getAllPeriodicalsByEngTitle(1));
+            assertNull(periodicalService.getAllPeriodicalsByUkrTitle(1));
+            assertNull(periodicalService.getAllPeriodicalsByPrice(1));
+            assertNull(periodicalService.getAllPeriodicalsBySubscribes(new ArrayList<>()));
+            assertNull(periodicalService.getAllPeriodicalsByTopics(new ArrayList<>()));
         } catch (DbException e) {
             fail("Cannot get periodicals", e);
         }

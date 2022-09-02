@@ -1,6 +1,7 @@
 package app.entity;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * The class that represents user`s subscribe.
@@ -46,6 +47,8 @@ public class Subscribe implements Serializable {
 
     public int getFinalIssue() {return finalIssue;}
 
+
+
     public void setFinalIssue(int finalIssue) {this.finalIssue = finalIssue;}
 
     /**
@@ -55,6 +58,18 @@ public class Subscribe implements Serializable {
             setFinalIssue(finalIssue + amount);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Subscribe subscribe = (Subscribe) o;
+        return id == subscribe.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
     @Override
     public String toString() {
         return "Subscribe{" +

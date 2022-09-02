@@ -1,6 +1,7 @@
 package app.entity;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Class that represents Periodical topic in system.
@@ -54,6 +55,19 @@ public class Topic implements Serializable {
     public String getUkrTopicName() {return ukrTopicName;}
 
     public void setUkrTopicName(String ukrTopicName) {this.ukrTopicName = ukrTopicName;}
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Topic topic = (Topic) o;
+        return id == topic.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 
     @Override
     public String toString() {

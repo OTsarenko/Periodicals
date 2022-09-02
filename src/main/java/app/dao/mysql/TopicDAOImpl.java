@@ -21,13 +21,20 @@ public class TopicDAOImpl implements TopicDAO {
 
     private static final Logger LOGGER = LogManager.getLogger(TopicDAOImpl.class);
 
-    public Connection getConnection() throws SQLException {
-        return ConnectionDataSource.getInstance().getConnection();
+    Connection con;
+
+    public TopicDAOImpl() {
+        con = ConnectionDataSource.getInstance().getConnection();
     }
+
+    public TopicDAOImpl(Connection connection) {
+        this.con = connection;
+    }
+
 
     @Override
     public boolean insertTopic(Topic topic)  throws DbException{
-        try (Connection con = getConnection();
+        try (
              PreparedStatement preparedStatement = con.prepareStatement(ConstantsQuery.INSERT_TOPIC)) {
             setTopicParameters(topic, preparedStatement);
             return preparedStatement.executeUpdate() != 0;
@@ -39,7 +46,7 @@ public class TopicDAOImpl implements TopicDAO {
 
     @Override
     public boolean deleteTopic(Topic topic)  throws DbException{
-        try (Connection con = getConnection();
+        try (
              PreparedStatement preparedStatement = con.prepareStatement(ConstantsQuery.DELETE_TOPIC)){
             preparedStatement.setInt(1, topic.getId());
             return preparedStatement.executeUpdate() != 0;
@@ -51,7 +58,7 @@ public class TopicDAOImpl implements TopicDAO {
 
     @Override
     public boolean updateTopic(Topic topic)  throws DbException {
-        try (Connection con = getConnection();
+        try (
              PreparedStatement preparedStatement = con.prepareStatement(ConstantsQuery.UPDATE_TOPIC)){
             setTopicParameters(topic, preparedStatement);
             preparedStatement.setInt(3, topic.getId());
@@ -65,7 +72,7 @@ public class TopicDAOImpl implements TopicDAO {
     @Override
     public Topic getTopicById(int id) throws DbException {
 
-        try (Connection con = getConnection();
+        try (
              PreparedStatement preparedStatement = con.prepareStatement(ConstantsQuery.GET_TOPIC_BY_ID)) {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -87,7 +94,7 @@ public class TopicDAOImpl implements TopicDAO {
 
     public Topic getTopicByEngTitle(String engTitle) throws DbException {
 
-        try (Connection con = getConnection();
+        try (
              PreparedStatement preparedStatement = con.prepareStatement(ConstantsQuery.GET_TOPIC_BY_ENG_NAME)) {
             preparedStatement.setString(1, engTitle);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -110,7 +117,7 @@ public class TopicDAOImpl implements TopicDAO {
     public List<Topic> getAllTopics()  throws DbException{
         List<Topic> topics = new ArrayList<>();
 
-        try (Connection con = getConnection();
+        try (
              PreparedStatement preparedStatement = con.prepareStatement(ConstantsQuery.FIND_ALL_TOPICS)) {
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {

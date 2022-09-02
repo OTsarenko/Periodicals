@@ -5,9 +5,10 @@ import app.dao.interfaces.UserDAO;
 import app.entity.User;
 import app.web.service.interfacas.UserService;
 import org.junit.jupiter.api.Test;
+
 import java.util.List;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class UserServiceImplTest {
 
@@ -51,47 +52,38 @@ class UserServiceImplTest {
     UserService userService = new UserServiceImpl(mockUserDao);
 
     @Test
-    void insertUser(){
-        try {
-            userService.insertUser(new User());
-        } catch (DbException e) {
-            fail("Cannot insert");
-        }
+    void insertUser() {
+        MyAssertions.assertDoesNotThrow(() -> userService.insertUser(new User()));
     }
 
     @Test
-    void deleteUserById(){
-        try {
-            userService.deleteUserById(new User());
-        } catch (DbException e) {
-            fail("Cannot delete");
-        }
+    void deleteUserById() {
+        MyAssertions.assertDoesNotThrow(() -> userService.deleteUserById(new User()));
     }
 
     @Test
-    void updateUser(){
-        try {
-            userService.updateUser(new User());
-        } catch (DbException e) {
-            fail("Cannot update");
-        }
+    void updateUser() {
+        MyAssertions.assertDoesNotThrow(() -> userService.updateUser(new User()));
     }
 
     @Test
-    void getUser(){
+    void getUser() {
         try {
-            assertEquals(null, userService.getUserById(1));
-            assertEquals(null, userService.getUserByLogin("testLogin"));
-            assertEquals(null, userService.getUserByMail("testMail@ukr.net"));
+            assertNull(userService.getUserById(1));
+            assertNull(userService.getUserById(2));
+            assertNull(userService.getUserByLogin("testLogin"));
+            assertNull(userService.getUserByLogin("testLogin2"));
+            assertNull(userService.getUserByMail("testMail@ukr.net"));
+            assertNull(userService.getUserByMail("test2Mail@ukr.net"));
         } catch (DbException e) {
             fail("Cannot get user");
         }
     }
 
     @Test
-    void findAllUsers(){
+    void findAllUsers() {
         try {
-            assertEquals(null, userService.findAllUsers());
+            assertNull(userService.findAllUsers());
         } catch (DbException e) {
             fail("Cannot get user");
         }
